@@ -1,8 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
-// Arquivo para armazenar o contador
-const DB_PATH = path.join(__dirname, '../../.data/contador.json');
+// Caminho para a pasta .data na mesma pasta da função
+const DATA_DIR = path.join(__dirname, '.data');
+const DB_PATH = path.join(DATA_DIR, 'contador.json');
+
+// Cria o diretório .data se não existir
+if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+}
 
 // Cria arquivo se não existir
 if (!fs.existsSync(DB_PATH)) {
