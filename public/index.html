@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>⚠️ Alerta de Phishing Simulado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ff0000;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 { animation: piscar 0.5s infinite; }
+        @keyframes piscar { 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body>
+    <h1>VOCÊ FOI ENGANADO!</h1>
+    <p>Total de acessos: <span id="contador">...</span></p>
+    
+    <script>
+        // Chama a função Netlify para obter/atualizar o contador
+        fetch('/.netlify/functions/contador')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('contador').textContent = data.total;
+            });
+    </script>
+</body>
+</html>
