@@ -1,18 +1,81 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>🎁 Formulário dos Brindes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: red;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 { animation: piscar 0.5s infinite; }
-        @keyframes piscar { 50% { opacity: 0.5; } }
-    </style>
+  <meta charset="UTF-8">
+  <title>🎁 Formulário dos Brinde</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    .glitch-screen {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: flicker 0.2s infinite;
+    }
+
+    h1, h2, h3 {
+      margin: 10px;
+      text-align: center;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: 2em;
+      color: #00ff00;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .glitch::before {
+      animation: glitchTop 1s infinite;
+      color: #00ffaa;
+      top: -2px;
+    }
+
+    .glitch::after {
+      animation: glitchBottom 1s infinite;
+      color: #00cc66;
+      top: 2px;
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      50% { clip: rect(0, 9999px, 100%, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip: rect(100%, 9999px, 100%, 0); }
+      50% { clip: rect(0, 9999px, 100%, 0); }
+      100% { clip: rect(100%, 9999px, 100%, 0); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+  </style>
 </head>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TE0RTM4G8P"></script>
@@ -24,18 +87,11 @@
   gtag('config', 'G-TE0RTM4G8P');
 </script>
 <body>
-    <h1>Atenção: Este foi um teste de phishing</h1>
-    <h3>Fique tranquilo, seu dispositivo não foi comprometido. Esta simulação foi realizada apenas para fins educativos e de conscientização.</h3>
-    <img src="imagem_treinamento.png" alt="Treinamento">
-
-    
-    <script>
-        // Chama a função Netlify para obter/atualizar o contador
-        fetch('/.netlify/functions/contador')
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('contador').textContent = data.total;
-            });
-    </script>
+  <div class="glitch-screen">
+    <h1 class="glitch" data-text="⚠️ SISTEMA COMPROMETIDO">⚠️ SISTEMA COMPROMETIDO</h1>
+    <h2 class="glitch" data-text="Simulação de Phishing">Simulação de Phishing</h2>
+    <h3 class="glitch" data-text="Nenhum dado foi comprometido.">Nenhum dado foi comprometido.</h3>
+    <h3 class="glitch" data-text="Treinamento: Reconhecer, Apoiar e Proteger">Treinamento: Reconhecer, Apoiar e Proteger</h3>
+  </div>
 </body>
 </html>
