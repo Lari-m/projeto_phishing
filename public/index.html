@@ -5,41 +5,35 @@
   <meta charset="UTF-8">
   <title>🎁 Formulário dos Brinde</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    body {
       background: black;
       color: #00ff00;
       font-family: 'Courier New', monospace;
       overflow: hidden;
-    }
-
-    .glitch-screen {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: black;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      animation: flicker 0.2s infinite;
-    }
-
-    h1, h2, h3 {
-      margin: 10px;
-      text-align: center;
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-    }
-
-    .glitch {
+      flex-direction: column;
       position: relative;
-      font-size: 2em;
-      color: #00ff00;
     }
 
-    .glitch::before,
-    .glitch::after {
+    .glitch-text {
+      font-size: 2em;
+      position: relative;
+      color: #00ff00;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+      margin-bottom: 20px;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
       content: attr(data-text);
       position: absolute;
       left: 0;
@@ -47,33 +41,72 @@
       overflow: hidden;
     }
 
-    .glitch::before {
-      animation: glitchTop 1s infinite;
-      color: #00ffaa;
+    .glitch-text::before {
+      animation: glitchTop 1s infinite linear alternate-reverse;
+      color: #ff00ff;
       top: -2px;
     }
 
-    .glitch::after {
-      animation: glitchBottom 1s infinite;
-      color: #00cc66;
+    .glitch-text::after {
+      animation: glitchBottom 1s infinite linear alternate-reverse;
+      color: #00ffff;
       top: 2px;
     }
 
     @keyframes glitchTop {
-      0% { clip: rect(0, 9999px, 0, 0); }
-      50% { clip: rect(0, 9999px, 100%, 0); }
-      100% { clip: rect(0, 9999px, 0, 0); }
+      0% { clip: rect(0, 9999px, 0, 0); transform: translate(-2px, -2px); }
+      50% { clip: rect(0, 9999px, 100%, 0); transform: translate(2px, 2px); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: translate(-1px, 1px); }
     }
 
     @keyframes glitchBottom {
-      0% { clip: rect(100%, 9999px, 100%, 0); }
-      50% { clip: rect(0, 9999px, 100%, 0); }
-      100% { clip: rect(100%, 9999px, 100%, 0); }
+      0% { clip: rect(100%, 9999px, 100%, 0); transform: translate(2px, 2px); }
+      50% { clip: rect(0, 9999px, 100%, 0); transform: translate(-2px, -2px); }
+      100% { clip: rect(100%, 9999px, 100%, 0); transform: translate(1px, -1px); }
+    }
+
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 255, 0, 0.05),
+        rgba(0, 255, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      z-index: 1;
+      pointer-events: none;
+      animation: flicker 0.15s infinite;
     }
 
     @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.8; }
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 0.6; }
+    }
+
+    button {
+      background-color: #00ff00;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      z-index: 2;
+    }
+
+    #mensagemFinal {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #00ff88;
+      text-shadow: 0 0 5px #00ff88;
+      z-index: 2;
     }
   </style>
 </head>
@@ -87,11 +120,15 @@
   gtag('config', 'G-TE0RTM4G8P');
 </script>
 <body>
-  <div class="glitch-screen">
-    <h1 class="glitch" data-text="⚠️ SISTEMA COMPROMETIDO">⚠️ SISTEMA COMPROMETIDO</h1>
-    <h2 class="glitch" data-text="Simulação de Phishing">Simulação de Phishing</h2>
-    <h3 class="glitch" data-text="Nenhum dado foi comprometido.">Nenhum dado foi comprometido.</h3>
-    <h3 class="glitch" data-text="Treinamento: Reconhecer, Apoiar e Proteger">Treinamento: Reconhecer, Apoiar e Proteger</h3>
-  </div>
+  <div class="glitch-text" data-text="⚠️ SISTEMA COMPROMETIDO">⚠️ SISTEMA COMPROMETIDO</div>
+  <button onclick="mostrarMensagem()">Corrigir</button>
+  <div id="mensagemFinal">✅ Reconhecer, Apoiar e Proteger – Treinamento sobre Golpes e Fraudes</div>
+  <div class="scanlines"></div>
+
+  <script>
+    function mostrarMensagem() {
+      document.getElementById("mensagemFinal").style.display = "block";
+    }
+  </script>
 </body>
 </html>
